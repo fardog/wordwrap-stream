@@ -1,0 +1,16 @@
+wordwrap: Wrap lines of text at column
+
+Usage: wordwrap [options] [stop] file
+
+Options:
+  --stop -x      Column at which text should wrap
+  --start -s     Padding columns at the start of text
+  --mode -m      Default `soft`; `hard` breaks words longer than stop - start
+  --help         Show this help text
+  --version      Show version number and exit
+
+Examples:
+
+  $ wordwrap 20 text.txt
+  $ wordwrap --stop 20 text.txt
+  $ cat text.txt | wordwrap 20
