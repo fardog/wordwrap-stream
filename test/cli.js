@@ -1,4 +1,4 @@
-import EE from 'events'
+import {EventEmitter as EE} from 'events'
 
 import test from 'tape'
 import through from 'through2'
