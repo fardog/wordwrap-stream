@@ -1,4 +1,4 @@
-import EE from 'events'
+import {EventEmitter as EE} from 'events'
 
 import test from 'tape'
 import through from 'through2'
@@ -15,7 +15,7 @@ const cli = proxyquire(
 test('correctly parses arguments, calls ready', t => {
   t.plan(5)
 
-  const args = '--start 20 --stop 80 --mode hard file.txt'
+  const args = '--start 20 --stop 80 --hard file.txt'
   const input = through()
 
   let filename
@@ -47,7 +47,7 @@ test('correctly parses arguments, calls ready', t => {
 test('uses stdin as input when not TTY', t => {
   t.plan(1)
 
-  const args = '--start 20 --stop 80 --mode hard file.txt'
+  const args = '--start 20 --stop 80 --hard file.txt'
   const input = through()
 
   fsStub.createReadStream = () => through()
@@ -156,23 +156,6 @@ test('fails when param is not an integer', t => {
   cli(through(), through(), args.split(' '), (err, argv) => {
     t.ok(err)
     t.equal(err.badParam, 'integer')
-
-    libStub.end()
-  })
-})
-
-test('fails when mode is not expected value', t => {
-  t.plan(2)
-
-  const args = '--mode beep --stop 20'
-
-  fsStub.createReadStream = () => t.fail('should not call fs')
-
-  libStub.once('instantiated', () => t.fail('should not call lib'))
-
-  cli(through(), through(), args.split(' '), (err, argv) => {
-    t.ok(err)
-    t.equal(err.badParam, 'mode')
 
     libStub.end()
   })

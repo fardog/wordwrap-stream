@@ -5,7 +5,7 @@ Usage: wordwrap [options] [stop] file
 Options:
   --stop -x      Column at which text should wrap
   --start -s     Padding columns at the start of text
-  --mode -m      Default `soft`; `hard` breaks words longer than stop - start
+  --hard -h      Break single words longer than stop - start
   --help         Show this help text
   --version      Show version number and exit
 
