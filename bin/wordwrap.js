@@ -4,7 +4,7 @@ var path = require('path')
 
 var cli = require('../lib/cli')
 
-cli(process.stdin, process.stdout, process.argv.slice(2), function (err, args) {
+cli(process.stdin, process.stdout, process.argv.slice(2), function (err, _args) {
   if (err) {
     console.error(
       'You had an error in your syntax. Please run with `--help` for usage.',
@@ -13,6 +13,8 @@ cli(process.stdin, process.stdout, process.argv.slice(2), function (err, args) {
 
     return process.exit(1)
   }
+
+  var args = _args || {}
 
   if (args.version) {
     var pkg = require('../package.json')

@@ -29,6 +29,8 @@ $ wordwrap 20 file.txt > wrapped.txt
 $ cat file.txt | wordwrap --stop 20 > wrapped.txt
 ```
 
+Use `wordwrap --help` for a full lits of options.
+
 ## API
 
 `wordwrap(wrapOpts, [streamOpts]) -> transformStream`

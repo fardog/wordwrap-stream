@@ -12,11 +12,10 @@ function cli (input, output, args, ready) {
     alias: {
       'stop': 'x',
       'start': 's',
-      'mode': 'm'
+      'hard': 'h'
     },
     integer: ['start', 'stop'],
-    boolean: ['version', 'help'],
-    string: ['mode'],
+    boolean: ['version', 'help', 'hard'],
     default: {
       'mode': 'soft'
     }
@@ -49,13 +48,8 @@ function cli (input, output, args, ready) {
     return ready(err)
   }
 
-  // ensure 'mode' is one of soft/hard
-  if (argv.mode && !(new Set(['soft', 'hard'])).has(argv.mode)) {
-    const err = new Error('`mode` must be one of `soft, hard`')
-
-    err.badParam = 'mode'
-
-    return ready(err)
+  if (argv.hard) {
+    argv.mode = 'hard'
   }
 
   const wrap = wordwrap(argv)
