@@ -20,9 +20,12 @@ file.pipe(wrap)
 
 ## CLI
 
+Install with `npm install -g wordwrap-stream`; all of the following examples are
+equivalent:
+
 ```
-$ npm install -g wordwrap-stream
 $ wordwrap --stop 20 file.txt > wrapped.txt
+$ wordwrap 20 file.txt > wrapped.txt
 $ cat file.txt | wordwrap --stop 20 > wrapped.txt
 ```
 
@@ -42,6 +45,13 @@ $ cat file.txt | wordwrap --stop 20 > wrapped.txt
   [transformStream][]; this is where you could specify the streams
   `highWaterMark` or put it into `objectMode`. Read the
   [stream docs][transformStream] for details.
+
+## Notes
+
+- Because `wordwrap-stream` only deals with chunks of data as it gets them, it
+  needs to remember the last line to ensure that there isn't a "break" where a
+  line is too short. It's important to end the stream (or its data source),
+  which will flush the stream.
 
 ## License
 
