@@ -34,12 +34,28 @@ function cli (input, output, args, ready) {
 
   // verify integer expecting args have an integer
   if (cliOpts.integer.some(opt => argv[opt] && !Number.isInteger(argv[opt]))) {
-    return ready(new Error('`stop` or `start` parameters expect an integer'))
+    const err = new Error('`stop` or `start` parameters expect an integer')
+
+    err.badParam = 'integer'
+
+    return ready(err)
+  }
+
+  if (!argv.stop) {
+    const err = new Error('`stop` is a required parameter')
+
+    err.badParam = 'stop'
+
+    return ready(err)
   }
 
   // ensure 'mode' is one of soft/hard
   if (argv.mode && !(new Set(['soft', 'hard'])).has(argv.mode)) {
-    return ready(new Error('`mode` must be one of `soft, hard`'))
+    const err = new Error('`mode` must be one of `soft, hard`')
+
+    err.badParam = 'mode'
+
+    return ready(err)
   }
 
   const wrap = wordwrap(argv)
@@ -51,7 +67,11 @@ function cli (input, output, args, ready) {
   } else if (argv._[0]) {
     file = fs.createReadStream(path.resolve(process.cwd(), argv._[0]))
   } else {
-    return ready(new Error('no file or pipe specified for input'))
+    const err = new Error('no file or pipe specified for input')
+
+    err.badParam = 'file'
+
+    return ready(err)
   }
 
   wrap.on('end', () => ready())
