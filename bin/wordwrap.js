@@ -6,7 +6,11 @@ var cli = require('../lib/cli')
 
 cli(process.stdin, process.stdout, process.argv.slice(2), function (err, args) {
   if (err) {
-    console.error(err)
+    console.error(
+      'You had an error in your syntax. Please run with `--help` for usage.',
+      `\n${err.message}`
+    )
+
     return process.exit(1)
   }
 
