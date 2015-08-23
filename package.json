@@ -1,6 +1,6 @@
 {
   "name": "wordwrap-stream",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Streaming interface to node-wordwrap",
   "main": "lib/index.js",
   "bin": {
