@@ -1,14 +1,14 @@
-import through from 'through2'
-import wordwrap from 'wordwrap'
+const through = require('through2')
+const wordwrap = require('@fardog/wordwrap')
 
-export default wordwrapStream
+module.exports = wordwrapStream
 
 function wordwrapStream (
-  {start = 0, stop, mode = 'soft'} = {},
+  {start = 0, stop, mode = 'soft', lengthFn} = {},
   streamOpts = {}
 ) {
   const stream = through(streamOpts, write, end)
-  const wrap = wordwrap(start, stop, {mode})
+  const wrap = wordwrap(start, stop, {mode, lengthFn})
 
   let last
 

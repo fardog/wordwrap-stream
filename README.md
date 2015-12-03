@@ -43,6 +43,11 @@ Use `wordwrap --help` for a full lits of options.
       lines
     - `mode` (optional, string, default: `soft`) if words that are longer than
       `stop - start` should be forcibly split
+    - `lengthFn` (optional, function, default: `String.length`) a function
+      that should be used to determine the length of the current chunk; by
+      default it just uses the string's `.length` property, but should you
+      choose you can pass a function that understands other lengths (like
+      double-width characters, for instance)
 - `streamOpts` (optional, object) options passed to the underlying
   [transformStream][]; this is where you could specify the streams
   `highWaterMark` or put it into `objectMode`. Read the
@@ -59,5 +64,5 @@ Use `wordwrap --help` for a full lits of options.
 
 MIT. See [LICENSE](./LICENSE) for details.
 
-[node-wordwrap]: https://github.com/substack/node-wordwrap
+[node-wordwrap]: https://github.com/fardog/node-wordwrap
 [transformStream]: https://nodejs.org/api/stream.html#stream_class_stream_transform
