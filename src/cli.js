@@ -1,11 +1,11 @@
-import fs from 'fs'
-import path from 'path'
+const fs = require('fs')
+const path = require('path')
 
-import minimist from 'minimist'
+const minimist = require('minimist')
 
-import wordwrap from './'
+const wordwrap = require('./')
 
-export default cli
+module.exports = cli
 
 function cli (input, output, args, ready) {
   const cliOpts = {
